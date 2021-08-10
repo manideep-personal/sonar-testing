@@ -6,9 +6,10 @@ on:
             - main
             - develop
       
-name: Main WorkFlow
+
 jobs:
   sonarcloud:
+    name: Main WorkFlow
     runs-on: ubuntu-latest
     steps:
        - uses: actions/checkout@v2
