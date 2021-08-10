@@ -15,7 +15,7 @@ jobs:
        - uses: actions/checkout@v2
          with:
            fetch-depth: 0 
-       - uses: docker://sonarsource/sonar-sclanner-cli:latest
+       - uses: docker://sonarsource/sonar-scanner-cli:latest
          with:
             args: >
               -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
