@@ -5,7 +5,8 @@ on:
     branches: 
       - main, develop, feature_1
   pull_request:
-      types: [opened, synchronize, reopened]
+    branches:
+      - main
       
 name: Main WorkFlow
 jobs:
