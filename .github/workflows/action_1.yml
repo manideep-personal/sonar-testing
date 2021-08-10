@@ -1,0 +1,28 @@
+
+on:
+  
+  push:
+    branches: 
+      - main
+  pull_request:
+      types: [opened, synchronize, reopened]
+      
+name: Main WorkFlow
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+       - uses: actions/checkout@v2
+         with:
+           fetch-depth: 0 
+       - uses: docker://sonarsource/sonar-sclanner-cli:latest
+         with:
+            args: >
+              -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+              -Dsonar.pullrequest.branch=${{ github.HEAD_REF }}
+              -Dsonar.pullrequest.base=${{ github.BASE_REF }}
+              -Dsonar.pullrequest.key=${{ github.event.number }}
+         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
